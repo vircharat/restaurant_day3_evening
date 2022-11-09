@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RestaurantEntity.Food>
+
+<h1>Index of customer</h1>
+
+<div>
+    <a asp-controller="Customer" asp-action="Index">Admin Section</a>
+    <hr />
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <h3>Foods</h3>
+        <hr />
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Food Id</th>
+                    <th>Food Name</th>
+                    <th>Food Type</th>
+                    <th>Food Cost</th>
+                    <th>Food Cuisine</th>
+                    
+
+
+              
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Food in Model) @*mvc controller name is asp controller and its function name is asp-action and asp-route-moveid (is used in url means ) we need pass the same argument in  editFood of Foodcontroller (route name) here which is FoodId
+                which can be written as http://localhost:32344/Foods/edit Food?Foodid=2//
+                *@
+                {
+                    @* string imageBase64Data = Convert.ToBase64String(Food.ImgPoster);
+                string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);*@
+                    <tr>
+                        <td>@Food.FoodId</td>
+                        <td>@Food.FoodName</td>
+                        <td>@Food.FoodType</td>
+                        <td>@Food.FoodCost</td>
+                        <td>@Food.FoodCuisine</td>
+                     
+                        @*  <td><img height="50" width="50" src="@imageDataURL" /></td>*@
+
+                        <td>
+                            <a asp-controller="Order" asp-action="AddOrder1"
+                           asp-route-FoodId="@Food.FoodId" type="button" class="btn btn-success">Add to list</a>
+                        </td>
+                        
+
+                    </tr>
+
+                }
+                <a asp-controller="Order" asp-action="ConfirmOrder" class="btn btn-success">Confirm Order</a>
+               
+                <a asp-controller="Order" asp-action="GetOrders1" class="btn btn-success">View List</a>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
